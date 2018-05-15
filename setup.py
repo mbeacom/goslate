@@ -5,24 +5,21 @@
 '''
 
 import os
-import sys
+
+from setuptools import setup
+
 import goslate as module
 
 __author__ = 'ZHUO Qiang'
 __date__ = '2013-05-14'
 
-import os
-from setuptools import setup
 
-# Python 2
-if sys.version_info[0] == 2:
-    requires = ['futures']
-# Python 3
-else:
-    requires = []
+requires = []
+extras_require = {':python_version == "2.7"': ['futures']}
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 setup(
     name = module.__name__,
@@ -38,6 +35,7 @@ setup(
     long_description=read('README.rst'),
     install_requires=requires,
     test_suite='test_goslate',
+    extras_require=extras_require,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
